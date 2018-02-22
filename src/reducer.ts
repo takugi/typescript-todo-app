@@ -1,4 +1,5 @@
 import { Action } from 'redux'
+import { Task } from './model/module'
 
 export enum AppActionNames {
   ADD = 'todoApp/add'
@@ -6,10 +7,10 @@ export enum AppActionNames {
 
 interface AddTodoAction extends Action {
   type: AppActionNames.ADD,
-  addTodo: string
+  addTodo: Task
 }
 
-export const addTodoAction = (todo: string): AddTodoAction => ({
+export const addTodoAction = (todo: Task): AddTodoAction => ({
   type: AppActionNames.ADD,
   addTodo: todo
 })
@@ -18,7 +19,7 @@ export type AppActions =
   | AddTodoAction
 
 export interface AppState {
-  todoList: string[]
+  todoList: Task[]
 }
 
 const initialState: AppState = {
