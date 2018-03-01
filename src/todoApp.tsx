@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect, MapStateToPropsParam } from 'react-redux'
 import { ReduxState, Dispatch } from './store'
-import { addTodoAction, changeCheckAction } from './reducer'
+import { addTodoAction, changeCheckAction, deleteFinishTaskAction } from './reducer'
 import { Task } from './model/module'
 import AddTodo from './addTodo'
 import TodoList from './todoList'
@@ -22,14 +22,19 @@ class TodoApp extends React.Component<Props, {}> {
     this.props.dispatch(addTodoAction(todo))
   }
 
-  changeFinishChecked(index: number) {
-    this.props.dispatch(changeCheckAction(index))
+  changeFinishChecked(id: number) {
+    this.props.dispatch(changeCheckAction(id))
+  }
+
+  deleteFinishTask() {
+    this.props.dispatch(deleteFinishTaskAction())
   }
 
   render() {
     return <>
       <AddTodo onSubmit={(todo) => this.addTodoClick(todo)} />
-      <TodoList todoList={this.props.todoList} onChangeFinishChecked={(index) => this.changeFinishChecked(index)} />
+      <button onClick={this.deleteFinishTask.bind(this)}>finishDelete</button>
+      <TodoList todoList={this.props.todoList} onChangeFinishChecked={(id) => this.changeFinishChecked(id)} />
     </>
   }
 }

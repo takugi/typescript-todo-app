@@ -1,11 +1,17 @@
 export class Task {
 
-  title: string;
-  finishChecked: boolean;
+  private id: number;
+  private title: string;
+  private finishChecked: boolean;
 
-  constructor(title: string, finishChecked : boolean  = false) {
+  constructor(id: number, title: string, finishChecked : boolean  = false) {
+    this.id = id;
     this.title = title;
     this.finishChecked = finishChecked;
+  }
+
+  public getId() : number {
+    return this.id
   }
 
   public getTitle() : string {

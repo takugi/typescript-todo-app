@@ -3,8 +3,8 @@ import { Task } from './model/module'
 
 type Props = {
   task: Task,
-  index: number,
-  onChangeFinishChecked: (index: number) => any
+  id: number,
+  onChangeFinishChecked: (id: number) => any
 }
 
 export default class Todo extends React.Component<Props, {}> {
@@ -14,14 +14,15 @@ export default class Todo extends React.Component<Props, {}> {
   }
 
   handleChangeFinishChecked() {
-    this.props.onChangeFinishChecked(this.props.index)
+    this.props.onChangeFinishChecked(this.props.id)
   }
 
   render() {
+    console.log(this.props.task.getFinishChecked());
     return (
       <div>
-        <input type="checkbox" onChange={this.handleChangeFinishChecked.bind(this) } checked={this.props.task.finishChecked ? "checked" : null} />
-        <span>{ this.props.task.title }</span>
+        <input type="checkbox" onChange={this.handleChangeFinishChecked.bind(this) } checked={this.props.task.getFinishChecked() ? "checked" : null} />
+        <span>{ this.props.task.getTitle() }</span>
       </div>
     )
   }

@@ -4,14 +4,14 @@ import { Task } from './model/module'
 
 type Props = {
   todoList: Task[],
-  onChangeFinishChecked: (index: number) => any
+  onChangeFinishChecked: (id: number) => any
 }
 
 export default function TodoList({ todoList, onChangeFinishChecked }: Props) {
   return (
     <div>
-      {todoList.map((task: Task, index: number) => {
-        return <Todo task={task} index={index} onChangeFinishChecked={(id) => onChangeFinishChecked(id)} />
+      {todoList.map((task: Task) => {
+        return <Todo task={task} id={task.getId()} onChangeFinishChecked={(id) => onChangeFinishChecked(id)} />
       })}
     </div>
   )
