@@ -1,22 +1,26 @@
 export class Task {
 
   title: string;
-  finishedCheckbox: boolean;
+  finishChecked: boolean;
 
-  constructor(title: string, finishedCheckbox?: boolean) {
+  constructor(title: string, finishChecked : boolean  = false) {
     this.title = title;
-    if (finishedCheckbox == null) {
-      this.finishedCheckbox = false;
-    } else {
-      this.finishedCheckbox = finishedCheckbox;
-    }
+    this.finishChecked = finishChecked;
   }
 
   public getTitle() : string {
     return this.title
   }
 
-  public getFinishedCheckbox() : boolean {
-    return this.finishedCheckbox
+  public getFinishChecked() : boolean {
+    return this.finishChecked
+  }
+
+  public changeFinishChecked() : void {
+    if (this.finishChecked) {
+      this.finishChecked = false;
+    } else {
+      this.finishChecked = true;
+    }
   }
 }

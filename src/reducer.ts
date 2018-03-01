@@ -2,21 +2,33 @@ import { Action } from 'redux'
 import { Task } from './model/module'
 
 export enum AppActionNames {
-  ADD = 'todoApp/add'
+  ADD = 'todoApp/add',
+  CHANGECHECK = 'todoApp/changeCheck'
 }
 
 interface AddTodoAction extends Action {
   type: AppActionNames.ADD,
-  addTodo: Task
+  todo: string
 }
 
-export const addTodoAction = (todo: Task): AddTodoAction => ({
+interface ChangeCheckAction extends Action {
+  type: AppActionNames.CHANGECHECK,
+  index: number
+}
+
+export const addTodoAction = (todo: string): AddTodoAction => ({
   type: AppActionNames.ADD,
-  addTodo: todo
+  todo: todo
+})
+
+export const changeCheckAction = (index: number): ChangeCheckAction => ({
+  type: AppActionNames.CHANGECHECK,
+  index: index
 })
 
 export type AppActions =
   | AddTodoAction
+  | ChangeCheckAction
 
 export interface AppState {
   todoList: Task[]
@@ -29,7 +41,11 @@ const initialState: AppState = {
 export default function reducer(state: AppState = initialState, action: AppActions): AppState {
   switch (action.type) {
     case AppActionNames.ADD:
-      return { ...state, todoList: state.todoList.concat(action.addTodo) }
+      return { ...state, todoList: state.todoList.concat(new Task(action.todo)) }
+    case AppActionNames.CHANGECHECK:
+      let task : Task = state.todoList[action.index]
+      task.changeFinishChecked()
+      return { ...state, todoList: state.todoList}
     default:
       return state
   }

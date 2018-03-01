@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { Task } from './model/module'
 
 type PropsFromState = {
-  onSubmit: (todo: Task) => any
+  onSubmit: (todo: string) => any
 }
 
 type Props = PropsFromState
@@ -27,7 +26,7 @@ export default class AddTodo extends React.Component<Props, State> {
   }
 
   handleAddSubmit() {
-    this.props.onSubmit(new Task(this.state.inputTodo))
+    this.props.onSubmit(this.state.inputTodo)
   }
 
   render() {
