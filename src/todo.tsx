@@ -21,7 +21,7 @@ export default class Todo extends React.Component<Props, {}> {
     console.log(this.props.task.getFinishChecked());
     return (
       <div>
-        <input type="checkbox" onChange={this.handleChangeFinishChecked.bind(this) } checked={this.props.task.getFinishChecked() ? "checked" : null} />
+        <input type="checkbox" onChange={this.handleChangeFinishChecked.bind(this) } checked={this.props.task.getFinishChecked()} />
         <span>{ this.props.task.getTitle() }</span>
       </div>
     )

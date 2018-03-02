@@ -31,7 +31,7 @@ export const changeCheckAction = (id: number): ChangeCheckAction => ({
   id: id
 })
 
-export const deleteFinishTaskAction = (index: number): DeleteFinishTaskAction => ({
+export const deleteFinishTaskAction = (): DeleteFinishTaskAction => ({
   type: AppActionNames.DELETE_FINISH_TASK
 })
 
@@ -48,6 +48,16 @@ const initialState: AppState = {
   todoList: []
 }
 
+// type Task = {
+//
+// }
+
+// type Todos = { [string]: Task }
+//
+// {
+//   "1": { id: "1", title: "", ... },
+// }
+
 export default function reducer(state: AppState = initialState, action: AppActions): AppState {
   switch (action.type) {
     case AppActionNames.ADD:
@@ -56,7 +66,11 @@ export default function reducer(state: AppState = initialState, action: AppActio
     case AppActionNames.CHANGE_CHECK:
       let task : Task = state.todoList[action.id - 1]
       task.changeFinishChecked()
-      return { ...state, todoList: state.todoList}
+      let newTask : Task = new Task(task.getId(), task.getTitle(), task.getFinishChecked())
+      let newChangeTodoList : Task[] = [...state.todoList]
+      newChangeTodoList[task.getId() - 1] = newTask
+      return { ...state, todoList: newChangeTodoList}
+      // return { ...state, todoList: { ...state.todoList, [action.id]: newTask } }
     case AppActionNames.DELETE_FINISH_TASK:
       let newTodoList = state.todoList.filter((task: Task) => {
         return task.getFinishChecked() == false
